@@ -1,7 +1,7 @@
 export default function Home() {
   return (
     <main>
-      <h1>random content</h1>
+      <h1>homepage</h1>
     </main>
   );
 }
