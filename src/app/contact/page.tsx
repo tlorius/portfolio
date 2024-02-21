@@ -1,38 +1,53 @@
 "use client";
 
-import { useState } from "react";
+import { FC } from "react";
+import { useForm } from "react-hook-form";
+import { sendEmail } from "../utils/send-email";
 
-export default function Contact() {
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+export type FormData = {
+  name: string;
+  email: string;
+  message: string;
+};
+const Contact: FC = () => {
+  const { register, handleSubmit } = useForm<FormData>();
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log({ email, message });
-  };
+  function onSubmit(data: FormData) {
+    sendEmail(data);
+  }
+
   return (
     <>
       <h1 className="text-center">Contact Me!</h1>
       <form
         className="grid grid-cols-1 gap-4"
-        onSubmit={(event) => handleSubmit(event)}
+        onSubmit={handleSubmit(onSubmit)}
       >
         <label>
-          Email
+          Name{" "}
           <input
-            type="email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
+            type="text"
+            placeholder="Name"
+            {...register("name", { required: true })}
             className="border border-solid border-black"
           />
         </label>
         <label>
-          Message
+          Email{" "}
+          <input
+            type="email"
+            placeholder="example@domain.com"
+            {...register("email", { required: true })}
+            className="border border-solid border-black"
+          />
+        </label>
+        <label>
+          Message{" "}
           <textarea
             cols={40}
             rows={5}
-            value={message}
-            onChange={(event) => setMessage(event.target.value)}
+            placeholder="Enter your message"
+            {...register("message", { required: true })}
             className="border border-solid border-black"
           ></textarea>
         </label>
@@ -44,4 +59,6 @@ export default function Contact() {
       </form>
     </>
   );
-}
+};
+
+export default Contact;
