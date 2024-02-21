@@ -16,8 +16,8 @@ export async function POST(request: NextRequest) {
   const mailOptions: Mail.Options = {
     from: process.env.MY_EMAIL,
     to: process.env.MY_EMAIL,
-    //cc: email
-    subject: `Message from contact from ${email}`,
+    //cc: email TODO :> send cc to requester
+    subject: `Contact Form Message from ${name} (${email})`,
     text: message,
   };
 
