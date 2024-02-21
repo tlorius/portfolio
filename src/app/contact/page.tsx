@@ -12,7 +12,7 @@ export default function Contact() {
   };
   return (
     <>
-      <h1>Contactpage</h1>
+      <h1 className="text-center">Contact Me!</h1>
       <form
         className="grid grid-cols-1 gap-4"
         onSubmit={(event) => handleSubmit(event)}
@@ -28,12 +28,13 @@ export default function Contact() {
         </label>
         <label>
           Message
-          <input
-            type="text"
+          <textarea
+            cols={40}
+            rows={5}
             value={message}
             onChange={(event) => setMessage(event.target.value)}
             className="border border-solid border-black"
-          />
+          ></textarea>
         </label>
         <input
           type="submit"
